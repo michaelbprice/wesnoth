@@ -53,6 +53,9 @@ jobs:
           git checkout 5b081066f0740e54bdcbe4d0772d85dbb1d8e266
           D:/a/wesnoth/vcpkg/bootstrap-vcpkg.bat
 
+      - name: Run vcpkg install manually to debug
+        run: D:/a/wesnoth/vcpkg/vcpkg.exe install --debug
+
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.13
         with:
