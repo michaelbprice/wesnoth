@@ -47,6 +47,7 @@ jobs:
 # checkout a specific commit to prevent cmake from thinking it can't use the cached dependencies anymore
 # the commit itself is just whatever happens to be the latest commit when a newer version is needed
       - name: Build vcpkg
+        shell: bash
         run: |
           git clone https://github.com/microsoft/vcpkg.git D:/a/wesnoth/vcpkg
           cd D:/a/wesnoth/vcpkg
