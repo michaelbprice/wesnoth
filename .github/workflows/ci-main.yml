@@ -51,8 +51,7 @@ jobs:
           git clone https://github.com/microsoft/vcpkg.git D:/a/wesnoth/vcpkg
           cd D:/a/wesnoth/vcpkg
           git checkout 151c42c5f4ec5f8b7c59369ad412ad5812643929
-          copy ${{ github.workspace }}/vcpkg-tool-metadata.txt ./scripts/vcpkg-tool-metadata.txt
-          type D:/a/wesnoth/vcpkg/scripts/vcpkg-tool-metadata.txt
+          cp ${{ github.workspace }}/vcpkg-tool-metadata.txt ./scripts/vcpkg-tool-metadata.txt
           D:/a/wesnoth/vcpkg/bootstrap-vcpkg.bat
 
       - name: Run vcpkg install manually to debug
