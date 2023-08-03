@@ -55,5 +55,5 @@ jobs:
           D:/a/wesnoth/vcpkg/bootstrap-vcpkg.bat
 
       - name: Run vcpkg install manually to debug
-        run: D:/a/wesnoth/vcpkg/vcpkg.exe install --debug --dryrun
+        run: D:/a/wesnoth/vcpkg/vcpkg.exe install --debug --dry-run
 
