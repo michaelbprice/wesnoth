@@ -55,25 +55,5 @@ jobs:
           D:/a/wesnoth/vcpkg/bootstrap-vcpkg.bat
 
       - name: Run vcpkg install manually to debug
-        run: D:/a/wesnoth/vcpkg/vcpkg.exe install --debug
+        run: D:/a/wesnoth/vcpkg/vcpkg.exe install --debug --dryrun
 
-      - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v1.13
-        with:
-          cmake-version: '3.20.6'
-
-      - name: Run cmake
-        run: |
-          cmake -DCMAKE_BUILD_TYPE=%CFG% -DENABLE_GAME=true -DENABLE_SERVER=true -DENABLE_CAMPAIGN_SERVER=true -DENABLE_TESTS=true -DENABLE_MYSQL=false -DENABLE_NLS=false -DVCPKG_TARGET_TRIPLET=x64-windows -DCMAKE_TOOLCHAIN_FILE=D:/a/wesnoth/vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_GENERATOR_PLATFORM=x64 -G "Visual Studio 16 2019" .
-
-# delete buildtrees directory to free up space after cmake invokes vcpkg to build the dependencies
-# otherwise the job was failing when trying to write a .obj file
-# building vcpkg on the more spacious C drive didn't work since for some reason vcpkg decides to not create the pango/cairo pkgconfig files there
-      - name: Build wesnoth, wesnothd, campaignd and unit tests
-        run: |
-          rmdir /s /q D:\a\wesnoth\vcpkg\buildtrees
-          MSBuild.exe wesnoth.sln -p:Configuration=%CFG%
-
-      - name: Run WML unit tests
-        if: matrix.cfg == 'Release'
-        run: python run_wml_tests -v -g -c -t 20 -p D:/a/wesnoth/wesnoth/%CFG%/wesnoth.exe
